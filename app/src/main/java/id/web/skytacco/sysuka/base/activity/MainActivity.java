@@ -1,7 +1,9 @@
-package id.web.skytacco.sysuka;
+package id.web.skytacco.sysuka.base.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import id.web.skytacco.sysuka.R;
 
 public class MainActivity extends AppCompatActivity {
 

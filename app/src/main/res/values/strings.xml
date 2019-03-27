@@ -8,4 +8,26 @@
     <string name="nav_header_subtitle">Saya Suka, Kamu Suka</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+    <string name="kesukaan">Kesukaan</string>
+    <string name="kategori">Kategori</string>
+    <string name="resep_makanan">Resep Makanan</string>
+    <string name="resep_minuman">Resep Minuman</string>
+    <string name="dunia_kuliner">Dunia Kuliner</string>
+    <string name="communicate">Communicate</string>
+    <string name="rating">Rating</string>
+    <string name="aplikasi_lainnya">Aplikasi Lainnya</string>
+    <string name="share">Share</string>
+    <string name="about">About</string>
+
+    <string name="pesan_keluar">Mau Keluar?</string>
+    <string name="yes">Yes</string>
+    <string name="beri_love">Beri Love</string>
+    <string name="app_more">Aplikasi Lainnya</string>
+
+    <string name="playstore_app_more">https://play.google.com/</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="resep_title">Resep</string>
+    <string name="kategori_title">Kategori</string>
+    <string name="tidak_ada_koneksi_internet">Tidak Ada Koneksi Internet</string>
+
 </resources>

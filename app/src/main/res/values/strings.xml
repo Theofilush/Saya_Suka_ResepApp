@@ -13,7 +13,7 @@
     <string name="resep_makanan">Resep Makanan</string>
     <string name="resep_minuman">Resep Minuman</string>
     <string name="dunia_kuliner">Dunia Kuliner</string>
-    <string name="communicate">Communicate</string>
+    <string name="communicate">Lainnya</string>
     <string name="rating">Rating</string>
     <string name="aplikasi_lainnya">Aplikasi Lainnya</string>
     <string name="share">Share</string>
@@ -29,5 +29,6 @@
     <string name="resep_title">Resep</string>
     <string name="kategori_title">Kategori</string>
     <string name="tidak_ada_koneksi_internet">Tidak Ada Koneksi Internet</string>
+    <string name="logo_di_about">logo di about</string>
 
 </resources>

@@ -11,7 +11,6 @@ import id.web.skytacco.sysuka.R;
 public class DurenFragment extends Fragment {
 
     public DurenFragment() {
-        // Required empty public constructor
     }
 
     @Override

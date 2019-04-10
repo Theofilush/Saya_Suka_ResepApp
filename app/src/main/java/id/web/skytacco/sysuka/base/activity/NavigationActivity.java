@@ -4,11 +4,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -16,15 +17,22 @@ import android.view.MenuItem;
 import android.view.View;
 
 import id.web.skytacco.sysuka.R;
+import id.web.skytacco.sysuka.base.fragment.AboutFragment;
 import id.web.skytacco.sysuka.base.fragment.tabLayout.HomeTabFragment;
 import id.web.skytacco.sysuka.util.Utils;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static int judulHalaman;
-    private final static int COLLAPSING_TOOLBAR = 0;
     private final static String COLLAPSE_TAG = "collapsing_toolbar";
     private final static String SELECTED_TAG = "selected_index";
+    private final static int COLLAPSING_TOOLBAR = 0;
+    private final static int CATEGORY = 1;
+    private final static int FAVORITE = 2;
+    private final static int RATE = 3;
+    private final static int MORE = 4;
+    private final static int SHARE = 5;
+    private final static int ABOUT = 6;
 
     private DrawerLayout mdrawer;
     private ActionBarDrawerToggle toggle;
@@ -32,16 +40,16 @@ public class NavigationActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mdrawer = findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
+                this, mdrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mdrawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         if (savedInstanceState != null) {
             navigationView.getMenu().getItem(savedInstanceState.getInt(SELECTED_TAG)).setChecked(true);
@@ -63,7 +71,7 @@ public class NavigationActivity extends AppCompatActivity
 */
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -140,32 +148,55 @@ public class NavigationActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
         if (id == R.id.nav_favorite) {
-
+            judulHalaman = COLLAPSING_TOOLBAR;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            mdrawer.closeDrawer(GravityCompat.START);
+            return true;
         } else if (id == R.id.nav_category) {
-
+            judulHalaman = COLLAPSING_TOOLBAR;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            mdrawer.closeDrawer(GravityCompat.START);
+            return true;
         } else if (id == R.id.nav_resep) {
             judulHalaman = COLLAPSING_TOOLBAR;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main,
-                        new HomeTabFragment(), COLLAPSE_TAG).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_resep2) {
-
+            judulHalaman = COLLAPSING_TOOLBAR;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            mdrawer.closeDrawer(GravityCompat.START);
+            return true;
         } else if (id == R.id.nav_duren) {
-
+            judulHalaman = COLLAPSING_TOOLBAR;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            mdrawer.closeDrawer(GravityCompat.START);
+            return true;
         } else if (id == R.id.nav_rating) {
-
-        }else if (id == R.id.nav_more) {
-
-        }else if (id == R.id.nav_share) {
-
+            judulHalaman = COLLAPSING_TOOLBAR;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            mdrawer.closeDrawer(GravityCompat.START);
+            return true;
+        } else if (id == R.id.nav_more) {
+            judulHalaman = COLLAPSING_TOOLBAR;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            mdrawer.closeDrawer(GravityCompat.START);
+            return true;
+        } else if (id == R.id.nav_share) {
+            judulHalaman = COLLAPSING_TOOLBAR;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            mdrawer.closeDrawer(GravityCompat.START);
+            return true;
         } else if (id == R.id.nav_about) {
-
+            judulHalaman = ABOUT;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new AboutFragment(), "about").commit();
+            mdrawer.closeDrawer(GravityCompat.START);
+            return true;
         }
 
         return false;

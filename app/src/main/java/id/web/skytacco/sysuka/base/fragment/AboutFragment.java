@@ -67,16 +67,10 @@ public class AboutFragment extends Fragment {
                     startActivity(Intent.createChooser(i, "Share"));
                 }
                 if (position == 5) {
-                    final String appName = getActivity().getPackageName();
-                    try {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appName)));
-                    } catch (android.content.ActivityNotFoundException anfe) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=" + appName)));
-                    }
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
                 }
                 if (position == 6) {
-                    //startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.play_more_apps))));
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("google.com ya")));
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Handoyo")));
                 }
             }
         });

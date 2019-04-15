@@ -30,5 +30,10 @@
     <string name="kategori_title">Kategori</string>
     <string name="tidak_ada_koneksi_internet">Tidak Ada Koneksi Internet</string>
     <string name="logo_di_about">logo di about</string>
+    <!-- teks di share menu-->
+    <string name="teksShare">Handoyo Oficial \n\n
+        Dapatkan Informasi tentang Aplikasi Lainnya.\n
+        kunjungi https://skytacco.web.id \n
+        atau hubungi email REALTH99@GMAIL.COM</string>
 
 </resources>

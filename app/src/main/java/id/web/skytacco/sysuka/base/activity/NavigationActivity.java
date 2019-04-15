@@ -27,12 +27,14 @@ public class NavigationActivity extends AppCompatActivity
     private final static String COLLAPSE_TAG = "collapsing_toolbar";
     private final static String SELECTED_TAG = "selected_index";
     private final static int COLLAPSING_TOOLBAR = 0;
-    private final static int CATEGORY = 1;
-    private final static int FAVORITE = 2;
-    private final static int RATE = 3;
-    private final static int MORE = 4;
-    private final static int SHARE = 5;
-    private final static int ABOUT = 6;
+    private final static int COLLAPSING_TOOLBAR2 = 1;
+    private final static int CATEGORY = 2;
+    private final static int FAVORITE = 3;
+    private final static int KULINER_WORLD = 4;
+    private final static int RATING = 5;
+    private final static int MORE = 6;
+    private final static int SHARE = 7;
+    private final static int ABOUT = 8;
 
     private DrawerLayout mdrawer;
     private ActionBarDrawerToggle toggle;
@@ -152,44 +154,48 @@ public class NavigationActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_favorite) {
-            judulHalaman = COLLAPSING_TOOLBAR;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
-            mdrawer.closeDrawer(GravityCompat.START);
-            return true;
-        } else if (id == R.id.nav_category) {
-            judulHalaman = COLLAPSING_TOOLBAR;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
-            mdrawer.closeDrawer(GravityCompat.START);
-            return true;
-        } else if (id == R.id.nav_resep) {
+        if (id == R.id.nav_resep) {
             judulHalaman = COLLAPSING_TOOLBAR;
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_resep2) {
-            judulHalaman = COLLAPSING_TOOLBAR;
+            judulHalaman = COLLAPSING_TOOLBAR2;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            mdrawer.closeDrawer(GravityCompat.START);
+            return true;
+        } else if (id == R.id.nav_favorite) {
+            judulHalaman = FAVORITE;
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            mdrawer.closeDrawer(GravityCompat.START);
+            return true;
+        } else if (id == R.id.nav_category) {
+            judulHalaman = CATEGORY;
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_duren) {
-            judulHalaman = COLLAPSING_TOOLBAR;
+            judulHalaman = KULINER_WORLD;
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_rating) {
-            judulHalaman = COLLAPSING_TOOLBAR;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            judulHalaman = RATING;
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_more) {
-            judulHalaman = COLLAPSING_TOOLBAR;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            judulHalaman = MORE;
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/developer?id=Handoyo")));
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_share) {
-            judulHalaman = COLLAPSING_TOOLBAR;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            judulHalaman = SHARE;
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name));
+            i.putExtra(Intent.EXTRA_TEXT, getString(R.string.teksShare) + "\nhttps://play.google.com/store/apps/details?id=" + getPackageName());
+            i.setType("text/plain");
+            startActivity(Intent.createChooser(i, "Share"));
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_about) {

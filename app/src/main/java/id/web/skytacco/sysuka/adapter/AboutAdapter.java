@@ -1,6 +1,7 @@
 package id.web.skytacco.sysuka.adapter;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,8 +25,9 @@ public class AboutAdapter extends ArrayAdapter<String> {
         this.imageId = imageId;
     }
 
+    @NonNull
     @Override
-    public View getView(int position, View view, ViewGroup parent) {
+    public View getView(int position, View view, @NonNull ViewGroup parent) {
         LayoutInflater inflater = context.getLayoutInflater();
         View rowView = inflater.inflate(R.layout.list_about, null, true);
 

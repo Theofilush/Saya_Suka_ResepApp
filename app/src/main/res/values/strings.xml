@@ -35,5 +35,8 @@
         Dapatkan Informasi tentang Aplikasi Lainnya.\n
         kunjungi https://skytacco.web.id \n
         atau hubungi email REALTH99@GMAIL.COM</string>
-
+    <string name="gambar_resep">gambar resep</string>
+    <string name="sembarang">sembarang</string>
+    <string name="search_hint">Search&#8230;</string>
+    <string name="search">Search</string>
 </resources>

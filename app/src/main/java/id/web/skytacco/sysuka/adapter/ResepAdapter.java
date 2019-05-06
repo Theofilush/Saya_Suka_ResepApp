@@ -25,15 +25,15 @@ public class ResepAdapter extends RecyclerView.Adapter<ResepAdapter.ViewHolder> 
     private Context context;
     private List<ResepItem> mListResepItem;
     private ResepItem itemRecipesList;
-    private int counter = 1;
 
     public ResepAdapter(Context context, List<ResepItem> abc) {
         this.context = context;
         this.mListResepItem = abc;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_resep, parent, false);
         return new ViewHolder(v);
     }
@@ -47,8 +47,9 @@ public class ResepAdapter extends RecyclerView.Adapter<ResepAdapter.ViewHolder> 
 
         holder.title.setText(itemRecipesList.getNewsHeading());
 
-        Picasso.get().load(Utils.SERVER_URL + "/upload/thumbs/" +
-                itemRecipesList.getNewsImage()).placeholder(R.drawable.ic_spatula_svgrepo).into(holder.image);
+        Picasso.get()
+                .load(Utils.SERVER_URL + "/upload/thumbs/" + itemRecipesList.getNewsImage()).placeholder(R.drawable.ic_spatula_svgrepo)
+                .into(holder.image);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override

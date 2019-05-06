@@ -34,7 +34,7 @@
                 android:background="@drawable/drawer_gradient"
                 android:gravity="bottom|center"
                 android:padding="10dp"
-                android:text="aaa"
+                android:text="@string/sembarang"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
 

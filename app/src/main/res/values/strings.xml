@@ -39,4 +39,9 @@
     <string name="sembarang">sembarang</string>
     <string name="search_hint">Search&#8230;</string>
     <string name="search">Search</string>
+    <!--dihalaman detail-->
+    <string name="tambah_favorite">Ditambahkan ke daftar Favorite</string>
+    <string name="buang_favorite">Dibuang dari Daftar Favorite</string>
+
+    <string name="menu_share">Share</string>
 </resources>

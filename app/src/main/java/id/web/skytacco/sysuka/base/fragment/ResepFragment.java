@@ -227,20 +227,20 @@ public class ResepFragment extends Fragment {
             } else {
                 try {
                     JSONObject mainJson = new JSONObject(result);
-                    JSONArray jsonArray = mainJson.getJSONArray("Json");
+                    JSONArray jsonArray = mainJson.getJSONArray(Utils.CATEGORY_ARRAY_NAME);
                     //JSONObject objJson = null;
                     JSONObject objJson;
                     for (int i = 0; i < jsonArray.length(); i++) {
                         objJson = jsonArray.getJSONObject(i);
                         ResepItem objItem = new ResepItem();
 
-                        objItem.setCId(objJson.getString("cid"));
-                        objItem.setCategoryName(objJson.getString("category_name"));
-                        objItem.setCatId(objJson.getString("nid"));
-                        objItem.setNewsImage(objJson.getString("news_image"));
-                        objItem.setNewsHeading(objJson.getString("news_heading"));
-                        objItem.setNewsDescription(objJson.getString("news_description"));
-                        objItem.setNewsDate(objJson.getString("news_date"));
+                        objItem.setCId(objJson.getString(Utils.CATEGORY_ITEM_CID));
+                        objItem.setCategoryName(objJson.getString(Utils.CATEGORY_ITEM_NAME));
+                        objItem.setCatId(objJson.getString(Utils.CATEGORY_ITEM_CAT_ID));
+                        objItem.setNewsImage(objJson.getString(Utils.CATEGORY_ITEM_NEWSIMAGE));
+                        objItem.setNewsHeading(objJson.getString(Utils.CATEGORY_ITEM_NEWSHEADING));
+                        objItem.setNewsDescription(objJson.getString(Utils.CATEGORY_ITEM_NEWSDESCRI));
+                        objItem.setNewsDate(objJson.getString(Utils.CATEGORY_ITEM_NEWSDATE));
 
                         arrayResepItem.add(objItem);
                     }

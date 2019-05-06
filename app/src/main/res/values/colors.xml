@@ -3,10 +3,15 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-
+    <color name="white">#ffffff</color>
 
     <color name="biru_sapphire">#333399</color>
     <color name="biru_dodger">#3399FF</color>
     <color name="biru_marine">#3366CC</color>
     <color name="gray">#F2F2F2</color>
+    <!--untuk warna pada swipe-->
+    <color name="orange">#FF9900</color>
+    <color name="green">#009900</color>
+    <color name="blue">#000099</color>
+    <color name="red">#ff0015</color>
 </resources>

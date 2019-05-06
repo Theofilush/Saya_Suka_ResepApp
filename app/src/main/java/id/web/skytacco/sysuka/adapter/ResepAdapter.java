@@ -17,89 +17,72 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import id.web.skytacco.sysuka.R;
+import id.web.skytacco.sysuka.base.activity.DetailActivity;
 import id.web.skytacco.sysuka.entity.ResepItem;
+import id.web.skytacco.sysuka.util.Utils;
 
 public class ResepAdapter extends RecyclerView.Adapter<ResepAdapter.ViewHolder> {
     private Context context;
-    private List<ResepItem> arrayItemRecipesList;
+    private List<ResepItem> mListResepItem;
     private ResepItem itemRecipesList;
     private int counter = 1;
 
-    public ResepAdapter(Context context, List<ResepItem> arrayItemRecipesList) {
+    public ResepAdapter(Context context, List<ResepItem> abc) {
         this.context = context;
-        this.arrayItemRecipesList = arrayItemRecipesList;
-    }
-
-    @NonNull
-    @Override
-    public ResepAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.lsv_item_recipes_list, parent, false);
-
-        return new ViewHolder(itemView);
+        this.mListResepItem = abc;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.lsv_item_recipes_list, parent, false);
-
-        loadInterstitialAd();
-
-        return new ViewHolder(itemView);
-
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_resep, parent, false);
+        return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ResepAdapter.ViewHolder holder, int position) {
-        itemRecipesList = arrayItemRecipesList.get(position);
+    public void onBindViewHolder(@NonNull ResepAdapter.ViewHolder holder, final int position) {
+        itemRecipesList = mListResepItem.get(position);
 
         Typeface font1 = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
         holder.title.setTypeface(font1);
 
         holder.title.setText(itemRecipesList.getNewsHeading());
 
-        Picasso.get().load(Config.SERVER_URL + "/upload/thumbs/" +
-                itemRecipesList.getNewsImage()).placeholder(R.drawable.ic_thumbnail).into(holder.image);
+        Picasso.get().load(Utils.SERVER_URL + "/upload/thumbs/" +
+                itemRecipesList.getNewsImage()).placeholder(R.drawable.ic_spatula_svgrepo).into(holder.image);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                itemRecipesList = arrayItemRecipesList.get(position);
+                itemRecipesList = mListResepItem.get(position);
 
                 int pos = Integer.parseInt(itemRecipesList.getCatId());
 
-                Intent intent = new Intent(context, ActivityRecipesDetail.class);
+                Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("POSITION", pos);
-                JsonConfig.NEWS_ITEMID = itemRecipesList.getCatId();
+                Utils.NEWS_ITEMID = itemRecipesList.getCatId();
 
                 context.startActivity(intent);
-
-                showInterstitialAd();
-
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return arrayItemRecipesList.size();
+        return mListResepItem.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
         public ImageView image;
         public TextView title;
         public RelativeLayout relativeLayout;
 
         public ViewHolder(View view) {
             super(view);
-
             title = view.findViewById(R.id.news_title);
             image = view.findViewById(R.id.news_image);
             relativeLayout = view.findViewById(R.id.relativeLayout);
-
         }
-
     }
+
+
 }

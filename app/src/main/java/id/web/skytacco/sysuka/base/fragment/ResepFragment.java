@@ -30,6 +30,9 @@ import java.util.List;
 
 import id.web.skytacco.sysuka.R;
 import id.web.skytacco.sysuka.adapter.ResepAdapter;
+import id.web.skytacco.sysuka.entity.ResepItem;
+import id.web.skytacco.sysuka.network.JsonNetwork;
+import id.web.skytacco.sysuka.util.Utils;
 
 public class ResepFragment extends Fragment {
 
@@ -37,14 +40,14 @@ public class ResepFragment extends Fragment {
     }
 
     RecyclerView recyclerView;
-    List<ItemRecipesList> arrayItemRecipesList;
+    List<ResepItem> arrayResepItem;
     ResepAdapter mResepAdapter;
     ArrayList<String> array_news, array_news_cat_name, array_cid, array_cat_id, array_cat_name, array_title, array_image, array_desc, array_date;
     String[] str_news, str_news_cat_name, str_cid, str_cat_id, str_cat_name, str_title, str_image, str_desc, str_date;
-    JsonUtils jsonUtils;
+    JsonNetwork mJsonNetwork;
     int textLength = 0;
     SwipeRefreshLayout swipeRefreshLayout = null;
-    private ItemRecipesList itemRecipesList;
+    private ResepItem mResepItem;
     private RelativeLayout rootLayout;
     private RelativeLayout relativeLayout;
 
@@ -57,19 +60,16 @@ public class ResepFragment extends Fragment {
         recyclerView = v.findViewById(R.id.recycler_view);
 
         rootLayout = v.findViewById(R.id.rootLayout);
-        if (Config.ENABLE_RTL_MODE) {
-            rootLayout.setRotationY(180);
-        }
 
         relativeLayout = v.findViewById(R.id.no_network);
         swipeRefreshLayout = v.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue, R.color.red);
 
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), Config.NUM_OF_COLUMNS));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), Utils.NUM_OF_COLUMNS));
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getActivity(), R.dimen.item_offset);
         recyclerView.addItemDecoration(itemDecoration);
 
-        arrayItemRecipesList = new ArrayList<ItemRecipesList>();
+        arrayResepItem = new ArrayList<ResepItem>();
         array_news = new ArrayList<String>();
         array_news_cat_name = new ArrayList<String>();
         array_cid = new ArrayList<String>();
@@ -90,12 +90,12 @@ public class ResepFragment extends Fragment {
         str_desc = new String[array_desc.size()];
         str_date = new String[array_date.size()];
 
-        jsonUtils = new JsonUtils(getActivity());
+        mJsonNetwork = new JsonNetwork(getActivity());
 
-        if (JsonUtils.isNetworkAvailable(getActivity())) {
-            new MyTask().execute(Config.SERVER_URL + "/api.php?latest_news=" + Config.NUM_OF_RECENT_RECIPES);
+        if (JsonNetwork.isNetworkAvailable(getActivity())) {
+            new MyTask().execute(Utils.SERVER_URL + "/api.php?latest_news=" + Utils.NUM_OF_RECENT_RECIPES);
         } else {
-            Toast.makeText(getActivity(), getResources().getString(R.string.failed_connect_network), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), "Tidak Ada Koneksi Internet!!", Toast.LENGTH_SHORT).show();
             relativeLayout.setVisibility(View.VISIBLE);
         }
 
@@ -128,10 +128,10 @@ public class ResepFragment extends Fragment {
     }
 
     public void clearData() {
-        int size = this.arrayItemRecipesList.size();
+        int size = this.arrayResepItem.size();
         if (size > 0) {
             for (int i = 0; i < size; i++) {
-                this.arrayItemRecipesList.remove(0);
+                this.arrayResepItem.remove(0);
             }
 
             mResepAdapter.notifyItemRangeRemoved(0, size);
@@ -139,7 +139,7 @@ public class ResepFragment extends Fragment {
     }
 
     public void setAdapterToRecyclerView() {
-        mResepAdapter = new ResepAdapter(getActivity(), arrayItemRecipesList);
+        mResepAdapter = new ResepAdapter(getActivity(), arrayResepItem);
         recyclerView.setAdapter(mResepAdapter);
     }
 
@@ -169,13 +169,13 @@ public class ResepFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
 
                 textLength = newText.length();
-                arrayItemRecipesList.clear();
+                arrayResepItem.clear();
 
                 for (int i = 0; i < str_title.length; i++) {
                     if (textLength <= str_title[i].length()) {
                         if (str_title[i].toLowerCase().contains(newText.toLowerCase())) {
 
-                            ItemRecipesList objItem = new ItemRecipesList();
+                            ResepItem objItem = new ResepItem();
 
                             objItem.setCategoryName((str_cat_name[i]));
                             objItem.setCatId(str_cat_id[i]);
@@ -184,7 +184,7 @@ public class ResepFragment extends Fragment {
                             objItem.setNewsDescription(str_desc[i]);
                             objItem.setNewsHeading(str_title[i]);
                             objItem.setNewsImage(str_image[i]);
-                            arrayItemRecipesList.add(objItem);
+                            arrayResepItem.add(objItem);
                         }
                     }
                 }
@@ -229,7 +229,7 @@ public class ResepFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            return JsonUtils.getJSONString(params[0]);
+            return JsonNetwork.getJSONString(params[0]);
         }
 
         @Override
@@ -250,7 +250,7 @@ public class ResepFragment extends Fragment {
                     for (int i = 0; i < jsonArray.length(); i++) {
                         objJson = jsonArray.getJSONObject(i);
 
-                        ItemRecipesList objItem = new ItemRecipesList();
+                        ResepItem objItem = new ResepItem();
 
                         objItem.setCId(objJson.getString(JsonConfig.CATEGORY_ITEM_CID));
                         objItem.setCategoryName(objJson.getString(JsonConfig.CATEGORY_ITEM_NAME));
@@ -260,36 +260,36 @@ public class ResepFragment extends Fragment {
                         objItem.setNewsDescription(objJson.getString(JsonConfig.CATEGORY_ITEM_NEWSDESCRI));
                         objItem.setNewsDate(objJson.getString(JsonConfig.CATEGORY_ITEM_NEWSDATE));
 
-                        arrayItemRecipesList.add(objItem);
+                        arrayResepItem.add(objItem);
 
                     }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                for (int j = 0; j < arrayItemRecipesList.size(); j++) {
+                for (int j = 0; j < arrayResepItem.size(); j++) {
 
-                    itemRecipesList = arrayItemRecipesList.get(j);
+                    mResepItem = arrayResepItem.get(j);
 
-                    array_cat_id.add(itemRecipesList.getCatId());
+                    array_cat_id.add(mResepItem.getCatId());
                     str_cat_id = array_cat_id.toArray(str_cat_id);
 
-                    array_cat_name.add(itemRecipesList.getCategoryName());
+                    array_cat_name.add(mResepItem.getCategoryName());
                     str_cat_name = array_cat_name.toArray(str_cat_name);
 
-                    array_cid.add(String.valueOf(itemRecipesList.getCId()));
+                    array_cid.add(String.valueOf(mResepItem.getCId()));
                     str_cid = array_cid.toArray(str_cid);
 
-                    array_image.add(String.valueOf(itemRecipesList.getNewsImage()));
+                    array_image.add(String.valueOf(mResepItem.getNewsImage()));
                     str_image = array_image.toArray(str_image);
 
-                    array_title.add(String.valueOf(itemRecipesList.getNewsHeading()));
+                    array_title.add(String.valueOf(mResepItem.getNewsHeading()));
                     str_title = array_title.toArray(str_title);
 
-                    array_desc.add(String.valueOf(itemRecipesList.getNewsDescription()));
+                    array_desc.add(String.valueOf(mResepItem.getNewsDescription()));
                     str_desc = array_desc.toArray(str_desc);
 
-                    array_date.add(String.valueOf(itemRecipesList.getNewsDate()));
+                    array_date.add(String.valueOf(mResepItem.getNewsDate()));
                     str_date = array_date.toArray(str_date);
                 }
 

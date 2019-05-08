@@ -44,4 +44,6 @@
     <string name="buang_favorite">Dibuang dari Daftar Favorite</string>
 
     <string name="menu_share">Share</string>
+    <string name="failed_connect_network">Tidak Ada Koneksi Internet!!</string>
+    <string name="image_kategori">image kategori</string>
 </resources>

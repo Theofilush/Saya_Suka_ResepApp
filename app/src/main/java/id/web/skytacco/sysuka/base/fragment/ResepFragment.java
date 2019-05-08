@@ -36,10 +36,6 @@ import id.web.skytacco.sysuka.util.DesainTampilan;
 import id.web.skytacco.sysuka.util.Utils;
 
 public class ResepFragment extends Fragment {
-
-    public ResepFragment() {
-    }
-
     RecyclerView recyclerView;
     List<ResepItem> arrayResepItem;
     ResepAdapter mResepAdapter;
@@ -50,6 +46,9 @@ public class ResepFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout = null;
     private RelativeLayout relativeLayout;
 
+    public ResepFragment() {
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,9 +56,6 @@ public class ResepFragment extends Fragment {
         setHasOptionsMenu(true);
 
         recyclerView = v.findViewById(R.id.recycler_view);
-
-
-
         relativeLayout = v.findViewById(R.id.no_network);
         swipeRefreshLayout = v.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue, R.color.red);
@@ -68,7 +64,7 @@ public class ResepFragment extends Fragment {
         DesainTampilan mDesainTampilan = new DesainTampilan(Objects.requireNonNull(getActivity()), R.dimen.desain_tampilan);
         recyclerView.addItemDecoration(mDesainTampilan);
 
-        arrayResepItem = new ArrayList<ResepItem>();
+        arrayResepItem = new ArrayList<>();
         array_news = new ArrayList<>();
         array_news_cat_name = new ArrayList<>();
         array_cid = new ArrayList<>();
@@ -101,7 +97,6 @@ public class ResepFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-
                 array_news.clear();
                 array_news_cat_name.clear();
                 array_cid.clear();
@@ -111,7 +106,6 @@ public class ResepFragment extends Fragment {
                 array_image.clear();
                 array_desc.clear();
                 array_date.clear();
-
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
@@ -171,7 +165,6 @@ public class ResepFragment extends Fragment {
                     if (textLength <= str_title[i].length()) {
                         if (str_title[i].toLowerCase().contains(newText.toLowerCase())) {
                             ResepItem objItem = new ResepItem();
-
                             objItem.setCategoryName((str_cat_name[i]));
                             objItem.setCatId(str_cat_id[i]);
                             objItem.setCId(str_cid[i]);

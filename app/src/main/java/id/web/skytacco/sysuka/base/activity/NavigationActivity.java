@@ -19,6 +19,7 @@ import android.view.View;
 import id.web.skytacco.sysuka.R;
 import id.web.skytacco.sysuka.base.fragment.AboutFragment;
 import id.web.skytacco.sysuka.base.fragment.tabLayout.HomeTabFragment;
+import id.web.skytacco.sysuka.base.fragment.tabLayout.KesukaanTabFragment;
 import id.web.skytacco.sysuka.util.Utils;
 
 public class NavigationActivity extends AppCompatActivity
@@ -153,7 +154,6 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_resep) {
             judulHalaman = COLLAPSING_TOOLBAR;
             getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
@@ -166,7 +166,7 @@ public class NavigationActivity extends AppCompatActivity
             return true;
         } else if (id == R.id.nav_favorite) {
             judulHalaman = FAVORITE;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new KesukaanTabFragment(), COLLAPSE_TAG).commit();
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_category) {

@@ -46,4 +46,7 @@
     <string name="menu_share">Share</string>
     <string name="failed_connect_network">Tidak Ada Koneksi Internet!!</string>
     <string name="image_kategori">image kategori</string>
+    <string name="tidak_ada_resep_favorit_ditemukan">Tidak Ada Resep Favorit Ditemukan</string>
+    <string name="jika_tidak_ditemukan">jika tidak ditemukan</string>
+
 </resources>

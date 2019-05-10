@@ -1,7 +1,6 @@
 package id.web.skytacco.sysuka.entity;
 
 public class FavoriteItem {
-
     private int id;
     private String CatId;
     private String CId;

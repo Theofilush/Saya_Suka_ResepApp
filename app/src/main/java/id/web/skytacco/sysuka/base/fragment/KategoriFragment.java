@@ -33,7 +33,7 @@ import id.web.skytacco.sysuka.R;
 import id.web.skytacco.sysuka.adapter.KategoriAdapter;
 import id.web.skytacco.sysuka.entity.KategoriItem;
 import id.web.skytacco.sysuka.network.JsonNetwork;
-import id.web.skytacco.sysuka.util.GridSpacingItemDecoration;
+import id.web.skytacco.sysuka.util.DesainTampilan2;
 import id.web.skytacco.sysuka.util.Utils;
 
 public class KategoriFragment extends Fragment {
@@ -55,13 +55,14 @@ public class KategoriFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_kategori2, container, false);
+        recyclerView = v.findViewById(R.id.recycler_view);
         relativeLayout = v.findViewById(R.id.no_network);
         swipeRefreshLayout = v.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setColorSchemeResources(R.color.orange, R.color.green, R.color.blue, R.color.red);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.addItemDecoration(new GridSpacingItemDecoration(1, 0, true));
         recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.addItemDecoration(new DesainTampilan2(1, 0, true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         arrayItemCategory = new ArrayList<>();
@@ -211,7 +212,6 @@ public class KategoriFragment extends Fragment {
                         objItem.setCategoryImageurl(objJson.getString(Utils.CATEGORY_IMAGE));
                         arrayItemCategory.add(objItem);
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

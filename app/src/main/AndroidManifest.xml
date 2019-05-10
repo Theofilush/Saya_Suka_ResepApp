@@ -20,10 +20,17 @@
         <activity
             android:name=".base.activity.DetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" />
+        <!--android:theme="@style/AppTheme.NoActionBar"/>-->
         <activity
             android:name=".base.activity.NavigationActivity"
             android:label="@string/title_activity_navigation"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".base.activity.Splashscreen"
             android:noHistory="true"

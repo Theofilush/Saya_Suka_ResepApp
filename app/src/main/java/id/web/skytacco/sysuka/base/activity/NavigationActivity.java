@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.view.View;
 import id.web.skytacco.sysuka.R;
 import id.web.skytacco.sysuka.base.fragment.AboutFragment;
 import id.web.skytacco.sysuka.base.fragment.tabLayout.HomeTabFragment;
+import id.web.skytacco.sysuka.base.fragment.tabLayout.KategoriTabFragment;
 import id.web.skytacco.sysuka.base.fragment.tabLayout.KesukaanTabFragment;
 import id.web.skytacco.sysuka.util.Utils;
 
@@ -46,16 +48,21 @@ public class NavigationActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mdrawer = findViewById(R.id.drawer_layout);
-        toggle = new ActionBarDrawerToggle(
+        /*final Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);*/
+        final ActionBar actionBar = getSupportActionBar();
+
+        /*toggle = new ActionBarDrawerToggle(
                 this, mdrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mdrawer.addDrawerListener(toggle);
-        toggle.syncState();
+        toggle.syncState();*/
 
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        NavigationView nv = findViewById(R.id.nav_view);
+        nv.setNavigationItemSelectedListener(this);
+        mdrawer = findViewById(R.id.drawer_layout);
+
         if (savedInstanceState != null) {
-            navigationView.getMenu().getItem(savedInstanceState.getInt(SELECTED_TAG)).setChecked(true);
+            nv.getMenu().getItem(savedInstanceState.getInt(SELECTED_TAG)).setChecked(true);
             return;
         }
 
@@ -66,21 +73,15 @@ public class NavigationActivity extends AppCompatActivity
 
     }
 
- /*   @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putInt(SELECTED_TAG, selectedIndex);
+    @Override
+    protected void onSaveInstanceState(Bundle mbundle) {
+        super.onSaveInstanceState(mbundle);
+        mbundle.putInt(SELECTED_TAG, judulHalaman);
     }
-*/
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -130,29 +131,21 @@ public class NavigationActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         if (id == R.id.nav_resep) {
             judulHalaman = COLLAPSING_TOOLBAR;
@@ -171,7 +164,7 @@ public class NavigationActivity extends AppCompatActivity
             return true;
         } else if (id == R.id.nav_category) {
             judulHalaman = CATEGORY;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new KategoriTabFragment(), COLLAPSE_TAG).commit();
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_duren) {

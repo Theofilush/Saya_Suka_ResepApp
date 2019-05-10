@@ -3,7 +3,6 @@ package id.web.skytacco.sysuka.base.fragment.tabLayout;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.TabLayout;
@@ -12,28 +11,32 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import id.web.skytacco.sysuka.R;
 import id.web.skytacco.sysuka.base.activity.NavigationActivity;
 import id.web.skytacco.sysuka.base.fragment.KategoriFragment;
 import id.web.skytacco.sysuka.base.fragment.ResepFragment;
-
-import static android.content.ContentValues.TAG;
+import id.web.skytacco.sysuka.util.AppBarLayoutBehavior;
 
 public class HomeTabFragment extends Fragment {
     public static final String EXTRAS = "extras";
-    private NavigationActivity na;
+    private NavigationActivity nact;
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
     public HomeTabFragment() {
     }
+
+    @Override //belum diexx
+    public void onAttach(Context activity) {
+        super.onAttach(activity);
+        nact = (NavigationActivity) activity;
+    }
+
     TabLayout.OnTabSelectedListener TlListener = new TabLayout.OnTabSelectedListener() {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
@@ -50,22 +53,21 @@ public class HomeTabFragment extends Fragment {
 
         }
     };
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        //AppBarLayout appBarLayout = view.findViewById(R.id.tabapplayout);
-        //((LinearLayout.LayoutParams) appBarLayout.getLayoutParams()).setBehavior(new AppBarLayoutBehavior());
+        View v = inflater.inflate(R.layout.fragment_home, container, false);
+        AppBarLayout appBarLayout = v.findViewById(R.id.tab_appbar_layout);
+        ((CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams()).setBehavior(new AppBarLayoutBehavior());
 
-        viewPager = view.findViewById(R.id.viewpager);
+        viewPager = v.findViewById(R.id.viewpager);
         viewPager.setAdapter(new RedAdapter(getChildFragmentManager()));
-
-        tabLayout = view.findViewById(R.id.viewPagerTab);
+        toolbar = v.findViewById(R.id.tab_toolbar);
+        setupToolbar();
+        toolbar.setTitle(getString(R.string.app_name));
+        nact.setSupportActionBar(toolbar);
+        tabLayout = v.findViewById(R.id.tabs);
         tabLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -73,23 +75,25 @@ public class HomeTabFragment extends Fragment {
             }
         });
         tabLayout.addOnTabSelectedListener(TlListener);
-        return view;
+        return v;
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        if (getArguments() != null) {
-            String page = getArguments().getString(EXTRAS);
-
-            Log.e(TAG, "onCreateView: halaman fragment " + page);
-        }
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        nact.setupNavigationDrawer(toolbar);
     }
+
+    private void setupToolbar() {
+        toolbar.setTitle(getString(R.string.app_name));
+        nact.setSupportActionBar(toolbar);
+    }
+
     public class RedAdapter extends FragmentPagerAdapter {
 
         private String tresep = getResources().getString(R.string.resep_title);
         private String tkategori = getResources().getString(R.string.kategori_title);
-        private final String tabs[] = {tresep, tkategori};
+        private final String[] tabs = {tresep, tkategori};
 
         RedAdapter(FragmentManager fm) {
             super(fm);
@@ -116,5 +120,4 @@ public class HomeTabFragment extends Fragment {
             return tabs[position];
         }
     }
-
 }

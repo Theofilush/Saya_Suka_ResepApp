@@ -42,20 +42,18 @@ public class KategoriTabFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-
         AppBarLayout appBarLayout = v.findViewById(R.id.tab_appbar_layout);
         ((CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams()).setBehavior(new AppBarLayoutBehavior());
 
         tabLayout = v.findViewById(R.id.tabs);
         viewPager = v.findViewById(R.id.viewpager);
+        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
+        viewPager.setCurrentItem(1);
 
         toolbar = v.findViewById(R.id.tab_toolbar);
         setupToolbar();
 
-        viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
-        viewPager.setCurrentItem(1);
 
         tabLayout.post(new Runnable() {
             @Override
@@ -79,11 +77,9 @@ public class KategoriTabFragment extends Fragment {
     }
 
     class MyAdapter extends FragmentPagerAdapter {
-
         public MyAdapter(FragmentManager fm) {
             super(fm);
         }
-
         @Override
         public Fragment getItem(int position) {
             switch (position) {

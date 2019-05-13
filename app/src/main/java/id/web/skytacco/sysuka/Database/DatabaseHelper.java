@@ -54,7 +54,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Adding Record in Database
-
     public void AddtoFavorite(FavoriteItem mFavoriteItem) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

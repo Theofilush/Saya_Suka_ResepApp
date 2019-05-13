@@ -48,10 +48,8 @@ public class NavigationActivity extends AppCompatActivity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /*final Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);*/
         final ActionBar actionBar = getSupportActionBar();
-
+        getSupportActionBar().hide();
         /*toggle = new ActionBarDrawerToggle(
                 this, mdrawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         mdrawer.addDrawerListener(toggle);

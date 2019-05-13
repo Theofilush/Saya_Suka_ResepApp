@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,6 @@ public class KesukaanFragment extends Fragment {
     String[] str_news, str_news_cat_name, str_cid, str_cat_id, str_cat_name, str_title, str_image, str_desc, str_date;
     int textLength = 0;
     private DatabaseHelper.DatabaseManager mDatabaseManager;
-    private RelativeLayout rootLayout;
 
     public KesukaanFragment() {
     }

@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import id.web.skytacco.sysuka.R;
-import id.web.skytacco.sysuka.base.activity.NavigationActivity;
+import id.web.skytacco.sysuka.base.activity.ResepByKategoriActivity;
 import id.web.skytacco.sysuka.entity.KategoriItem;
 import id.web.skytacco.sysuka.util.Utils;
 
@@ -58,8 +58,8 @@ public class KategoriAdapter extends RecyclerView.Adapter<KategoriAdapter.ViewHo
                 Utils.CATEGORY_IDD = mKategoriItem.getCategoryId();
                 Log.e("cat_id", "" + catId);
                 Utils.CATEGORY_TITLE = mKategoriItem.getCategoryName();
-                /*NOTEEEEEEEEEEEEEEE HEREEEEEEEEEEEEEEEEEEEEEEEE*/
-                Intent intent = new Intent(context, NavigationActivity.class);
+
+                Intent intent = new Intent(context, ResepByKategoriActivity.class);
                 context.startActivity(intent);
             }
         });

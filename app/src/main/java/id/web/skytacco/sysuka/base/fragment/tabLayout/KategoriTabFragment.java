@@ -20,11 +20,11 @@ import android.view.ViewGroup;
 import id.web.skytacco.sysuka.R;
 import id.web.skytacco.sysuka.base.activity.NavigationActivity;
 import id.web.skytacco.sysuka.base.fragment.KategoriFragment;
-import id.web.skytacco.sysuka.base.fragment.ResepFragment;
 import id.web.skytacco.sysuka.util.AppBarLayoutBehavior;
 
 public class KategoriTabFragment extends Fragment {
-    public static int int_items = 2;
+    //public static int int_items = 2;
+    public static int int_items = 1;
     private NavigationActivity na;
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -49,11 +49,10 @@ public class KategoriTabFragment extends Fragment {
         tabLayout = v.findViewById(R.id.tabs);
         viewPager = v.findViewById(R.id.viewpager);
         viewPager.setAdapter(new MyAdapter(getChildFragmentManager()));
-        viewPager.setCurrentItem(1);
+        //viewPager.setCurrentItem(1);
 
         toolbar = v.findViewById(R.id.tab_toolbar);
         setupToolbar();
-
 
         tabLayout.post(new Runnable() {
             @Override
@@ -80,12 +79,13 @@ public class KategoriTabFragment extends Fragment {
         public MyAdapter(FragmentManager fm) {
             super(fm);
         }
+
         @Override
         public Fragment getItem(int position) {
             switch (position) {
+                /*case 0:
+                    return new ResepFragment();*/
                 case 0:
-                    return new ResepFragment();
-                case 1:
                     return new KategoriFragment();
             }
             return null;
@@ -99,9 +99,9 @@ public class KategoriTabFragment extends Fragment {
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
+                /*case 0:
+                    return getResources().getString(R.string.resep_title);*/
                 case 0:
-                    return getResources().getString(R.string.resep_title);
-                case 1:
                     return getResources().getString(R.string.kategori_title);
             }
             return null;

@@ -18,50 +18,49 @@ import java.util.List;
 
 import id.web.skytacco.sysuka.R;
 import id.web.skytacco.sysuka.base.activity.DetailActivity;
-import id.web.skytacco.sysuka.entity.DurenItem;
+import id.web.skytacco.sysuka.entity.MinumanItem;
 import id.web.skytacco.sysuka.util.Utils;
 
-public class DurenAdapter extends RecyclerView.Adapter<DurenAdapter.ViewHolder> {
+public class MinumanAdapter extends RecyclerView.Adapter<MinumanAdapter.ViewHolder> {
     private Context context;
-    private List<DurenItem> mListDurenItem;
-    private DurenItem mDurenItem;
+    private List<MinumanItem> mListMinumanItem;
+    private MinumanItem itemRecipesList;
 
-    public DurenAdapter(Context context, List<DurenItem> abc) {
+    public MinumanAdapter(Context context, List<MinumanItem> abc) {
         this.context = context;
-        this.mListDurenItem = abc;
+        this.mListMinumanItem = abc;
     }
 
     @NonNull
     @Override
-    public DurenAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MinumanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_resep, parent, false);
-        return new DurenAdapter.ViewHolder(v);
+        return new MinumanAdapter.ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DurenAdapter.ViewHolder holder, final int position) {
-        mDurenItem = mListDurenItem.get(position);
+    public void onBindViewHolder(@NonNull MinumanAdapter.ViewHolder holder, final int position) {
+        itemRecipesList = mListMinumanItem.get(position);
 
         Typeface font1 = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
         holder.title.setTypeface(font1);
 
-        holder.title.setText(mDurenItem.getNewsHeading());
+        holder.title.setText(itemRecipesList.getNewsHeading());
 
         Picasso.get()
-                .load(Utils.SERVER_URL + "/upload/thumbs/" + mDurenItem.getNewsImage())
+                .load(Utils.SERVER_URL + "/upload/thumbs/" + itemRecipesList.getNewsImage())
                 .placeholder(R.drawable.ic_spatula_svgrepo)
                 .into(holder.image);
 
         holder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mDurenItem = mListDurenItem.get(position);
+                itemRecipesList = mListMinumanItem.get(position);
 
-                int pos = Integer.parseInt(mDurenItem.getCatId());
-
+                int pos = Integer.parseInt(itemRecipesList.getCatId());
                 Intent intent = new Intent(context, DetailActivity.class);
                 intent.putExtra("POSITION", pos);
-                Utils.NEWS_ITEMID = mDurenItem.getCatId();
+                Utils.NEWS_ITEMID = itemRecipesList.getCatId();
 
                 context.startActivity(intent);
             }
@@ -70,7 +69,7 @@ public class DurenAdapter extends RecyclerView.Adapter<DurenAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mListDurenItem.size();
+        return mListMinumanItem.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -85,5 +84,4 @@ public class DurenAdapter extends RecyclerView.Adapter<DurenAdapter.ViewHolder> 
             relativeLayout = view.findViewById(R.id.relativeLayout);
         }
     }
-
 }

@@ -28,7 +28,7 @@ public class AboutFragment extends Fragment {
             R.drawable.ic_baseline_rate_review_24px,
             R.drawable.ic_baseline_apps_24px
     };
-    String titleId[] = {
+    String[] titleId = {
             "Nama Aplikasi",
             "Aplikasi Versi",
             "Email",
@@ -36,7 +36,7 @@ public class AboutFragment extends Fragment {
             "Rate",
             "More"
     };
-    String subtitleId[] = {
+    String[] subtitleId = {
             "Saya Suka",
             "Version 1.0",
             "Saya Suka, Kamu Suka - realth99@gmail.com",
@@ -44,8 +44,10 @@ public class AboutFragment extends Fragment {
             "Klik List ini untuk memberikan Kami Bintang Yang terbaik",
             "Klik List ini untuk aplikasi Lainnya dari developer"
     };
+
     public AboutFragment() {
     }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

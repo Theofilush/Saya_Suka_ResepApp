@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +31,7 @@ import id.web.skytacco.sysuka.util.Utils;
 public class KesukaanFragment extends Fragment {
 
     RecyclerView recyclerView;
-    DatabaseHelper databaseHandler;
+    DatabaseHelper mDatabaseHelper;
     FavoriteAdapter adapterFavorite;
     LinearLayout relativeLayout;
     JsonNetwork mUtils;
@@ -55,12 +56,12 @@ public class KesukaanFragment extends Fragment {
         recyclerView.addItemDecoration(itemDecoration);
 
         relativeLayout = v.findViewById(R.id.relativeLayout);
-        databaseHandler = new DatabaseHelper(getActivity());
+        mDatabaseHelper = new DatabaseHelper(getActivity());
         mDatabaseManager = DatabaseHelper.DatabaseManager.INSTANCE;
         mDatabaseManager.init(getActivity());
         mUtils = new JsonNetwork(getActivity().getApplicationContext());
 
-        arrayItemFavorite = databaseHandler.getAllData();
+        arrayItemFavorite = mDatabaseHelper.getAllData();
         adapterFavorite = new FavoriteAdapter(getActivity(), arrayItemFavorite);
         recyclerView.setAdapter(adapterFavorite);
         if (arrayItemFavorite.size() == 0) {
@@ -88,7 +89,7 @@ public class KesukaanFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        arrayItemFavorite = databaseHandler.getAllData();
+        arrayItemFavorite = mDatabaseHelper.getAllData();
         adapterFavorite = new FavoriteAdapter(getActivity(), arrayItemFavorite);
         recyclerView.setAdapter(adapterFavorite);
         if (arrayItemFavorite.size() == 0) {
@@ -119,26 +120,20 @@ public class KesukaanFragment extends Fragment {
 
         for (int j = 0; j < arrayItemFavorite.size(); j++) {
             FavoriteItem objAllBean = arrayItemFavorite.get(j);
-
             array_cat_id.add(objAllBean.getCatId());
-            str_cat_id = array_cat_id.toArray(str_cat_id);
-
             array_cid.add(String.valueOf(objAllBean.getCId()));
-            str_cid = array_cid.toArray(str_cid);
-
             array_cat_name.add(objAllBean.getCategoryName());
-            str_cat_name = array_cat_name.toArray(str_cat_name);
-
             array_title.add(String.valueOf(objAllBean.getNewsHeading()));
-            str_title = array_title.toArray(str_title);
-
             array_image.add(String.valueOf(objAllBean.getNewsImage()));
-            str_image = array_image.toArray(str_image);
-
             array_desc.add(String.valueOf(objAllBean.getNewsDesc()));
-            str_desc = array_desc.toArray(str_desc);
-
             array_date.add(String.valueOf(objAllBean.getNewsDate()));
+
+            str_cat_id = array_cat_id.toArray(str_cat_id);
+            str_cid = array_cid.toArray(str_cid);
+            str_cat_name = array_cat_name.toArray(str_cat_name);
+            str_title = array_title.toArray(str_title);
+            str_image = array_image.toArray(str_image);
+            str_desc = array_desc.toArray(str_desc);
             str_date = array_date.toArray(str_date);
         }
     }
@@ -147,7 +142,7 @@ public class KesukaanFragment extends Fragment {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.search, menu);
 
-        final android.support.v7.widget.SearchView searchView = (android.support.v7.widget.SearchView)
+        final SearchView searchView = (SearchView)
                 MenuItemCompat.getActionView(menu.findItem(R.id.search));
 
         final MenuItem searchMenuItem = menu.findItem(R.id.search);

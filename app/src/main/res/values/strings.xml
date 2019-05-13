@@ -2,6 +2,8 @@
     <string name="app_name">Saya Suka</string>
     <string name="cat_name">Kategori</string>
     <string name="favorite_name">Kesukaan</string>
+    <string name="minuman_name">Minuman</string>
+    <string name="duren_name">Informasi Kuliner</string>
     <string name="logo_aplikasi">Logo Aplikasi</string>
     <string name="title_activity_navigation">NavigationActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -31,6 +33,7 @@
     <string name="resep_title">Resep</string>
     <string name="kategori_title">Kategori</string>
     <string name="kesukaan_title">Kesukaan</string>
+    <string name="duren_title">INFO</string>
     <string name="tidak_ada_koneksi_internet">Tidak Ada Koneksi Internet</string>
     <string name="logo_di_about">logo di about</string>
     <!-- teks di share menu-->

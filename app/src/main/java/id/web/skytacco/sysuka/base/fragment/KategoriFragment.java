@@ -47,6 +47,7 @@ public class KategoriFragment extends Fragment {
     private KategoriItem itemCategory;
     private RelativeLayout rootLayout;
     private RelativeLayout relativeLayout;
+
     public KategoriFragment() {
 
     }

@@ -122,68 +122,68 @@ public class DetailActivity extends AppCompatActivity {
         str_image = mResepItem.getNewsImage();
         str_date = mResepItem.getNewsDate();
 
-            news_title.setText(str_title);
-            news_date.setText(str_date);
+        news_title.setText(str_title);
+        news_date.setText(str_date);
 
-            news_desc.setBackgroundColor(Color.parseColor("#ffffff"));
-            news_desc.setFocusableInTouchMode(false);
-            news_desc.setFocusable(false);
-            news_desc.getSettings().setDefaultTextEncodingName("UTF-8");
+        news_desc.setBackgroundColor(Color.parseColor("#ffffff"));
+        news_desc.setFocusableInTouchMode(false);
+        news_desc.setFocusable(false);
+        news_desc.getSettings().setDefaultTextEncodingName("UTF-8");
 
-            WebSettings webSettings = news_desc.getSettings();
-            Resources res = getResources();
-            int fontSize = res.getInteger(R.integer.font_size);
-            webSettings.setDefaultFontSize(fontSize);
+        WebSettings webSettings = news_desc.getSettings();
+        Resources res = getResources();
+        int fontSize = res.getInteger(R.integer.font_size);
+        webSettings.setDefaultFontSize(fontSize);
 
-            String mimeType = "text/html; charset=UTF-8";
-            String encoding = "utf-8";
-            String htmlText = str_desc;
+        String mimeType = "text/html; charset=UTF-8";
+        String encoding = "utf-8";
+        String htmlText = str_desc;
 
-            String text = "<html><head>"
-                    + "<style type=\"text/css\">body{color: #525252;}"
-                    + "</style></head>"
-                    + "<body>"
-                    + htmlText
-                    + "</body></html>";
+        String text = "<html><head>"
+                + "<style type=\"text/css\">body{color: #525252;}"
+                + "</style></head>"
+                + "<body>"
+                + htmlText
+                + "</body></html>";
 
-            news_desc.loadData(text, mimeType, encoding);
+        news_desc.loadData(text, mimeType, encoding);
 
         Picasso.get()
                 .load(Utils.SERVER_URL + "/upload/" + mResepItem.getNewsImage())
                 .placeholder(R.drawable.ic_spatula_svgrepo)
-                    .into(img_news);
+                .into(img_news);
 
         List<FavoriteItem> itemFavorites = db.getFavRow(str_cat_id);
-            if (itemFavorites.size() == 0) {
-                img_fav.setImageResource(R.drawable.ic_favorite_border_white_24dp);
-            } else {
-                if (itemFavorites.get(0).getCatId().equals(str_cat_id)) {
-                    img_fav.setImageResource(R.drawable.ic_favorite_white_24dp);
-                }
+        if (itemFavorites.size() == 0) {
+            img_fav.setImageResource(R.drawable.ic_favorite_border_white_24dp);
+        } else {
+            if (itemFavorites.get(0).getCatId().equals(str_cat_id)) {
+                img_fav.setImageResource(R.drawable.ic_favorite_white_24dp);
             }
+        }
 
-            img_fav.setOnClickListener(new View.OnClickListener() {
+        img_fav.setOnClickListener(new View.OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
+            @Override
+            public void onClick(View v) {
 
-                    List<FavoriteItem> itemFavorites = db.getFavRow(str_cat_id);
-                    if (itemFavorites.size() == 0) {
+                List<FavoriteItem> itemFavorites = db.getFavRow(str_cat_id);
+                if (itemFavorites.size() == 0) {
 
-                        db.AddtoFavorite(new FavoriteItem(str_cat_id, str_cid, str_cat_name, str_title, str_image, str_desc, str_date));
-                        Toast.makeText(getApplicationContext(), "Ditambahkan ke daftar Favorite", Toast.LENGTH_SHORT).show();
-                        img_fav.setImageResource(R.drawable.ic_favorite_white_24dp);
+                    db.AddtoFavorite(new FavoriteItem(str_cat_id, str_cid, str_cat_name, str_title, str_image, str_desc, str_date));
+                    Toast.makeText(getApplicationContext(), "Ditambahkan ke daftar Favorite", Toast.LENGTH_SHORT).show();
+                    img_fav.setImageResource(R.drawable.ic_favorite_white_24dp);
 
-                    } else {
-                        if (itemFavorites.get(0).getCatId().equals(str_cat_id)) {
+                } else {
+                    if (itemFavorites.get(0).getCatId().equals(str_cat_id)) {
 
-                            db.RemoveFav(new FavoriteItem(str_cat_id));
-                            Toast.makeText(getApplicationContext(), "Dibuang dari Daftar Favorite", Toast.LENGTH_SHORT).show();
-                            img_fav.setImageResource(R.drawable.ic_favorite_border_white_24dp);
-                        }
+                        db.RemoveFav(new FavoriteItem(str_cat_id));
+                        Toast.makeText(getApplicationContext(), "Dibuang dari Daftar Favorite", Toast.LENGTH_SHORT).show();
+                        img_fav.setImageResource(R.drawable.ic_favorite_border_white_24dp);
                     }
                 }
-            });
+            }
+        });
     }
 
     @Override

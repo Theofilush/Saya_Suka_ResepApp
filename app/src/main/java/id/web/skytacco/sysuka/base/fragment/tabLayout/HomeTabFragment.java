@@ -27,16 +27,6 @@ public class HomeTabFragment extends Fragment {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
-    public HomeTabFragment() {
-    }
-
-    @Override //belum diexx
-    public void onAttach(Context activity) {
-        super.onAttach(activity);
-        nact = (NavigationActivity) activity;
-    }
-
     TabLayout.OnTabSelectedListener TlListener = new TabLayout.OnTabSelectedListener() {
         @Override
         public void onTabSelected(TabLayout.Tab tab) {
@@ -53,6 +43,9 @@ public class HomeTabFragment extends Fragment {
 
         }
     };
+
+    public HomeTabFragment() {
+    }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -76,6 +69,12 @@ public class HomeTabFragment extends Fragment {
         });
         tabLayout.addOnTabSelectedListener(TlListener);
         return v;
+    }
+
+    @Override //belum diexx
+    public void onAttach(Context activity) {
+        super.onAttach(activity);
+        nact = (NavigationActivity) activity;
     }
 
     @Override

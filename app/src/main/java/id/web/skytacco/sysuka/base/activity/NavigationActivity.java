@@ -19,14 +19,15 @@ import android.view.View;
 
 import id.web.skytacco.sysuka.R;
 import id.web.skytacco.sysuka.base.fragment.AboutFragment;
+import id.web.skytacco.sysuka.base.fragment.tabLayout.DurenTabFragment;
 import id.web.skytacco.sysuka.base.fragment.tabLayout.HomeTabFragment;
 import id.web.skytacco.sysuka.base.fragment.tabLayout.KategoriTabFragment;
 import id.web.skytacco.sysuka.base.fragment.tabLayout.KesukaanTabFragment;
+import id.web.skytacco.sysuka.base.fragment.tabLayout.MinumanTabFragment;
 import id.web.skytacco.sysuka.util.Utils;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private static int judulHalaman;
     private final static String COLLAPSE_TAG = "collapsing_toolbar";
     private final static String SELECTED_TAG = "selected_index";
     private final static int COLLAPSING_TOOLBAR = 0;
@@ -38,9 +39,10 @@ public class NavigationActivity extends AppCompatActivity
     private final static int MORE = 6;
     private final static int SHARE = 7;
     private final static int ABOUT = 8;
-
+    private static int judulHalaman;
     private DrawerLayout mdrawer;
     private ActionBarDrawerToggle toggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -152,7 +154,7 @@ public class NavigationActivity extends AppCompatActivity
             return true;
         } else if (id == R.id.nav_resep2) {
             judulHalaman = COLLAPSING_TOOLBAR2;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new MinumanTabFragment(), COLLAPSE_TAG).commit();
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_favorite) {
@@ -167,7 +169,7 @@ public class NavigationActivity extends AppCompatActivity
             return true;
         } else if (id == R.id.nav_duren) {
             judulHalaman = KULINER_WORLD;
-            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new HomeTabFragment(), COLLAPSE_TAG).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_main, new DurenTabFragment(), COLLAPSE_TAG).commit();
             mdrawer.closeDrawer(GravityCompat.START);
             return true;
         } else if (id == R.id.nav_rating) {

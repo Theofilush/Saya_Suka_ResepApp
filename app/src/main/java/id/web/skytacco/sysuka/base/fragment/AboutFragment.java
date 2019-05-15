@@ -1,10 +1,12 @@
 package id.web.skytacco.sysuka.base.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,9 +17,12 @@ import android.widget.ListView;
 
 import id.web.skytacco.sysuka.R;
 import id.web.skytacco.sysuka.adapter.AboutAdapter;
+import id.web.skytacco.sysuka.base.activity.NavigationActivity;
 
 public class AboutFragment extends Fragment {
     ListView list;
+    private Toolbar toolbar;
+    private NavigationActivity mainActivity;
     //  private MainActivity mainActivity;
     Integer[] imageId = {
             R.drawable.ic_home_black_24dp,
@@ -49,11 +54,17 @@ public class AboutFragment extends Fragment {
     }
 
     @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mainActivity = (NavigationActivity) activity;
+    }
+    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_about, container, false);
-
         setHasOptionsMenu(true);
+        toolbar = view.findViewById(R.id.toolbar);
+        setupToolbar();
 
         AboutAdapter mAboutAdapter = new AboutAdapter(getActivity(), titleId, subtitleId, imageId);
         list = view.findViewById(R.id.list);
@@ -87,11 +98,11 @@ public class AboutFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //   mainActivity.setupNavigationDrawer(toolbar);
+        mainActivity.setupNavigationDrawer(toolbar);
     }
 
-   /* private void setupToolbar(){
-        toolbar.setTitle(getString(R.string.drawer_about));
+    private void setupToolbar() {
+        toolbar.setTitle(getString(R.string.about_name));
         mainActivity.setSupportActionBar(toolbar);
-    }*/
+    }
 }

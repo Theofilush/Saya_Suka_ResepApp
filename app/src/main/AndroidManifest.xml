@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".base.activity.ResepByKategoriActivity"></activity>
+        <activity android:name=".base.activity.ResepByKategoriActivity" />
         <activity
             android:name=".base.activity.DetailActivity"
             android:configChanges="orientation|keyboardHidden|screenSize" /> <!-- android:theme="@style/AppTheme.NoActionBar"/> -->
@@ -25,11 +25,11 @@
             android:name=".base.activity.NavigationActivity"
             android:label="@string/title_activity_navigation"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".base.activity.Splashscreen"

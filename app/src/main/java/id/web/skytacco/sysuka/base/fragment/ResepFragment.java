@@ -126,7 +126,6 @@ public class ResepFragment extends Fragment {
             for (int i = 0; i < size; i++) {
                 this.arrayResepItem.remove(0);
             }
-
             mResepAdapter.notifyItemRangeRemoved(0, size);
         }
     }
@@ -187,7 +186,6 @@ public class ResepFragment extends Fragment {
                 return false;
             }
         });
-
     }
 
     @Override

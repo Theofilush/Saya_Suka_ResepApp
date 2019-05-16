@@ -87,7 +87,7 @@ public class MinumanFragment extends Fragment {
         mJsonNetwork = new JsonNetwork(getActivity());
 
         if (JsonNetwork.isNetworkAvailable(getActivity())) {
-            new MinumanFragment.MyTask().execute(Utils.SERVER_URL + "/api.php?latest_news=" + Utils.NUM_OF_RECENT_RECIPES);
+            new MinumanFragment.MyTask().execute(Utils.SERVER_URL + "/api.php?minuman=" + Utils.NUM_OF_RECENT_RECIPES);
         } else {
             Toast.makeText(getActivity(), "Tidak Ada Koneksi Internet!!", Toast.LENGTH_SHORT).show();
             relativeLayout.setVisibility(View.VISIBLE);
@@ -110,7 +110,7 @@ public class MinumanFragment extends Fragment {
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                         clearData();
-                        new MinumanFragment.MyTask().execute(Utils.SERVER_URL + "/api.php?latest_news=50");
+                        new MinumanFragment.MyTask().execute(Utils.SERVER_URL + "/api.php?minuman=50");
                     }
                 }, 1500);
             }

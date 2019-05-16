@@ -28,8 +28,8 @@ public class AboutAdapter extends ArrayAdapter<String> {
     @NonNull
     @Override
     public View getView(int position, View view, @NonNull ViewGroup parent) {
-        LayoutInflater inflater = context.getLayoutInflater();
-        View rowView = inflater.inflate(R.layout.list_about, null, true);
+        LayoutInflater mli = context.getLayoutInflater();
+        View rowView = mli.inflate(R.layout.list_about, null, true);
 
         TextView title = rowView.findViewById(R.id.title);
         TextView subtitle = rowView.findViewById(R.id.subtitle);

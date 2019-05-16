@@ -86,7 +86,7 @@ public class DurenFragment extends Fragment {
         mJsonNetwork = new JsonNetwork(getActivity());
 
         if (JsonNetwork.isNetworkAvailable(getActivity())) {
-            new DurenFragment.MyTask().execute(Utils.SERVER_URL + "/api.php?latest_news=" + Utils.NUM_OF_RECENT_RECIPES);
+            new DurenFragment.MyTask().execute(Utils.SERVER_URL + "/api.php?duren=" + Utils.NUM_OF_RECENT_RECIPES);
         } else {
             Toast.makeText(getActivity(), "Tidak Ada Koneksi Internet!!", Toast.LENGTH_SHORT).show();
             relativeLayout.setVisibility(View.VISIBLE);
@@ -109,7 +109,7 @@ public class DurenFragment extends Fragment {
                     public void run() {
                         swipeRefreshLayout.setRefreshing(false);
                         clearData();
-                        new DurenFragment.MyTask().execute(Utils.SERVER_URL + "/api.php?latest_news=50");
+                        new DurenFragment.MyTask().execute(Utils.SERVER_URL + "/api.php?duren=50");
                     }
                 }, 1500);
             }

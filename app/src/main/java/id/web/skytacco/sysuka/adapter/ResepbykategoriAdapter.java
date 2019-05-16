@@ -47,8 +47,7 @@ public class ResepbykategoriAdapter extends RecyclerView.Adapter<Resepbykategori
         holder.title.setText(itemRecipesList.getNewsHeading());
 
         Picasso.get()
-                .load(Utils.SERVER_URL + "/upload/thumbs/" +
-                        itemRecipesList.getNewsImage())
+                .load(Utils.SERVER_URL + "/upload/thumbs/" + itemRecipesList.getNewsImage())
                 .placeholder(R.drawable.ic_spatula_svgrepo)
                 .into(holder.image);
 
